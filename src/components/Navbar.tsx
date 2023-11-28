@@ -12,8 +12,6 @@ export function Navbar() {
 
     const pathname = usePathname()
 
-    const isMobile = window.innerWidth <= 992
-
     const [isOpen, setIsOpen] = useState(false)
 
 
@@ -36,7 +34,7 @@ export function Navbar() {
         },
     ];
 
-    const renderNav = () => (
+    const renderNav = (isMobile = false) => (
         <ul
             style={{
                 transition: '.4s ease'
@@ -78,9 +76,13 @@ export function Navbar() {
                 <button type={'button'} className={'lg:hidden'} onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <TimesIcon/> : <BarsIcon/>}
                 </button>
-                {!isMobile && renderNav()}
+                <div className={'2xl:block hidden'}>
+                    {renderNav()}
+                </div>
             </div>
-            {isMobile && renderNav()}
+            <div className={'2xl:hidden block'}>
+                {renderNav(true)}
+            </div>
         </>
 
     );
